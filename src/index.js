@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import { Box } from './components/Box';
 
 ReactDOM.render(
-  <App />,
+  <Box />,
   document.getElementById('root')
 );

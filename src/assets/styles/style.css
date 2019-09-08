@@ -1,6 +1,9 @@
 .box{
-  background-color: rgb(176,176,176);
+  background-color: #D8D8D8;
   height: 30px;
   width: 30px;
-  border: 2px solid rgb(232,232,232);
+  border-top: 2px solid #FFFFFF;
+  border-left: 2px solid #FFFFFF;
+  border-right: 2px solid #B0B0B0;
+  border-bottom: 2px solid #B0B0B0;
 }

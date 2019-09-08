@@ -3,8 +3,6 @@ import '../assets/styles/style.css';
 
 export function Box() {
   return (
-    <div>
-      <button className='box' />
-    </div>
+    <button className='box' />
   )
 }

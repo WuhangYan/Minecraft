@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Box } from './components/Box';
+import { Panel } from './components/Panel';
 
 ReactDOM.render(
-  <Box />,
+  <Panel />,
   document.getElementById('root')
 );

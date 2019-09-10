@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import '../assets/styles/style.css';
 
-export function Box() {
+export function Box(props) {
+
   return (
-    <button className='box' />
+    <button onClick={()=>console.log(props)} className='box' />
   )
 }

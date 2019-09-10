@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Box } from './Box';
+import '../assets/styles/style.css';
 
-export function Panel() {
+export function Boxpanel() {
   const [difficulty, setDiff] = useState('easy');
   let r = 9, c = 9;
   let col = [];
@@ -17,7 +18,7 @@ export function Panel() {
     );
   }
   return (
-    <div>
+    <div className='box_panel'>
       {col}
     </div>
   )

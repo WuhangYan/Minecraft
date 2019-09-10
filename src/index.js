@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Panel } from './components/Panel';
+import { Board } from './components/Board';
 
 ReactDOM.render(
-  <Panel />,
+  <Board />,
   document.getElementById('root')
 );

@@ -29,10 +29,13 @@ export function Box(props) {
   const handleClick = (e) => {
     const btnNum = e.button;
     if(props.clicked) return;
-    if(btnNum===0 && !props.flaged) {
-      if(props.num===9) alert('loose')   //will update in next commits
+    if(btnNum === 0 && !props.flaged) {
+      if(props.num === 9) {
+        alert('loose')
+        props.loose();
+      }
       else {
-        if(props.num===0) {
+        if(props.num === 0) {
           props.setZero(props.coor);
         }
         else{
@@ -40,7 +43,7 @@ export function Box(props) {
         }
       }
     }
-    else if(btnNum===2) {
+    else if(btnNum === 2) {
       props.setFlag(props.coor);
     }
   }

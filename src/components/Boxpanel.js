@@ -4,11 +4,10 @@ import '../assets/styles/style.css';
 
 export function Boxpanel(props) {
   const [openBox, setOpenBox] = useState(new Array());
+  const [flagBox, setFlagBox] = useState(new Array());
   const mines = props.mines;
   const r = props.total_row, c = props.total_col;
-  console.log(mines);
-
-  /* zeroBox for storing the box having the no mines around and arr for storing box needed to be auto opened
+  /* zeroBox for storing the box having no mines around and arr for storing the box needed to be auto opened
   before pusing new box to both array, a check for duplicate is required.
   */
   const handleZero = (pos) => {
@@ -18,35 +17,35 @@ export function Boxpanel(props) {
     while(loop < zeroBox.length) {
       const posArr = zeroBox[loop++].split('-');
       const row = parseInt(posArr[0]), col = parseInt(posArr[1]);
-      if(row>0 && col>0 && arr.indexOf((row-1) + '-' + (col-1))<0) {
+      if(row>0 && col>0 && arr.indexOf((row-1) + '-' + (col-1))<0 && flagBox.indexOf((row-1) + '-' + (col-1))<0) {
         arr.push((row-1) + '-' + (col-1));
         if(mines[row-1][col-1]===0 && zeroBox.indexOf((row-1) + '-' + (col-1))<0) zeroBox.push((row-1) + '-' + (col-1));
       }
-      if(row>0 && arr.indexOf((row-1) + '-' + col)<0) {
+      if(row>0 && arr.indexOf((row-1) + '-' + col)<0 && flagBox.indexOf((row-1) + '-' + col)<0) {
         arr.push((row-1) + '-' + col);
         if(mines[row-1][col]===0 && zeroBox.indexOf((row-1) + '-' + col)<0) zeroBox.push((row-1) + '-' + col);
       }
-      if(row>0 && col<c-1 && arr.indexOf((row-1) + '-' + (col+1))<0) {
+      if(row>0 && col<c-1 && arr.indexOf((row-1) + '-' + (col+1))<0 && flagBox.indexOf((row-1) + '-' + (col+1))<0) {
         arr.push((row-1) + '-' + (col+1));
         if(mines[row-1][col+1]===0 && zeroBox.indexOf((row-1) + '-' + (col+1))<0) zeroBox.push((row-1) + '-' + (col+1));
       }
-      if(col>0 && arr.indexOf(row + '-' + (col-1))<0) {
+      if(col>0 && arr.indexOf(row + '-' + (col-1))<0 && flagBox.indexOf(row + '-' + (col-1))<0) {
         arr.push(row + '-' + (col-1));
         if(mines[row][col-1]===0 && zeroBox.indexOf(row + '-' +  (col-1))<0) zeroBox.push(row + '-' +  (col-1));
       }
-      if(col<c-1 && arr.indexOf(row + '-' + (col+1))<0) {
+      if(col<c-1 && arr.indexOf(row + '-' + (col+1))<0 && flagBox.indexOf(row + '-' + (col+1))<0) {
         arr.push(row + '-' + (col+1));
         if(mines[row][col+1]===0 && zeroBox.indexOf(row + '-' + (col+1))<0) zeroBox.push(row + '-' + (col+1));
       }
-      if(row<r-1 && col>0 && arr.indexOf((row+1) + '-' + (col-1))<0) {
+      if(row<r-1 && col>0 && arr.indexOf((row+1) + '-' + (col-1))<0 && flagBox.indexOf((row+1) + '-' + (col-1))<0) {
         arr.push((row+1) + '-' + (col-1));
         if(mines[row+1][col-1]===0 && zeroBox.indexOf((row+1) + '-' + (col-1))<0) zeroBox.push((row+1) + '-' + (col-1));
       }
-      if(row<r-1 && arr.indexOf((row+1) + '-' + col)<0) {
+      if(row<r-1 && arr.indexOf((row+1) + '-' + col)<0 && flagBox.indexOf((row+1) + '-' + col)<0) {
         arr.push((row+1) + '-' + col);
         if(mines[row+1][col]===0 && zeroBox.indexOf((row+1) + '-' + col)<0) zeroBox.push((row+1) + '-' + col);
       }
-      if(row<r-1 && col<c-1 && arr.indexOf((row+1) + '-' + (col+1))<0) {
+      if(row<r-1 && col<c-1 && arr.indexOf((row+1) + '-' + (col+1))<0 && flagBox.indexOf((row+1) + '-' + (col+1))<0) {
         arr.push((row+1) + '-' + (col+1));
         if(mines[row+1][col+1]===0 && zeroBox.indexOf((row+1) + '-' + (col+1))<0) zeroBox.push((row+1) + '-' + (col+1));
       }
@@ -54,10 +53,19 @@ export function Boxpanel(props) {
     setOpenBox([...openBox, ...arr]);
   }
 
-  const handleOpen = (pos) => {
-    setOpenBox([...openBox, pos]);
+  const handleOpen = (coor) => {
+    setOpenBox([...openBox, coor]);
   }
 
+  const handleFlag = (coor) => {
+    const location = flagBox.indexOf(coor);
+    if(location>=0) {
+      const update = flagBox;
+      update.splice(location, 1);
+      setFlagBox([...update]);
+    }
+    else setFlagBox([...flagBox, coor]);
+  }
   let row = [];
   for(let i=0;i<r;i++){
     let col = [];
@@ -65,12 +73,13 @@ export function Boxpanel(props) {
       col.push(
         <Box
           key={i+'-'+j}
-          num={mines[i][j]}
-          flag={false}
-          open={handleOpen}
-          zero={handleZero}
           coor={i+'-'+j}
-          clicked={openBox.indexOf(i+'-'+j)>=0}
+          num={mines[i][j]}
+          setOpen={handleOpen}
+          setZero={handleZero}
+          setFlag={handleFlag}
+          opened={openBox.indexOf(i+'-'+j)>=0}
+          flaged={flagBox.indexOf(i+'-'+j)>=0}
         />
       )
     }

@@ -9,7 +9,11 @@
   outline: none;
   float: left
 }
-
+.box img{
+  float: left;
+  height: 30px;
+  width: 30px;
+}
 
 .menu, #game_dialog, #help_dialog{
   font-size: 15px;

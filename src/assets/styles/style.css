@@ -1,18 +1,56 @@
 .box{
-  background-color: #D8D8D8;
+  outline: none;
+  float: left;
+  padding: 0;
   height: 30px;
   width: 30px;
+}
+.unopen{
+  background-color: #D8D8D8;
   border-top: 2px solid #FFFFFF;
   border-left: 2px solid #FFFFFF;
   border-right: 2px solid #B0B0B0;
   border-bottom: 2px solid #B0B0B0;
-  outline: none;
-  float: left
+}
+.opened{
+  border: 1px solid #B0B0B0;
+  background-color: #D8D8D8;
 }
 .box img{
   float: left;
-  height: 30px;
-  width: 30px;
+  height: 26px;
+  width: 25px;
+}
+.box span{
+  font-weight: bold;
+  font-size: 12px;
+}
+.box .zero{
+  display: none;
+}
+.box .one{
+  color: mediumblue;
+}
+.box .two{
+  color: green
+}
+.box .three{
+  color: red;
+}
+.box .four{
+  color: darkblue
+}
+.box .five{
+  color: darkred;
+}
+.box .six{
+  color: orange;
+}
+.box .seven{
+  color: purple;
+}
+.box .eight{
+  color: black;
 }
 
 .menu, #game_dialog, #help_dialog{

@@ -7,6 +7,12 @@
   border-right: 2px solid #B0B0B0;
   border-bottom: 2px solid #B0B0B0;
   outline: none;
+  float: left
+}
+.box img{
+  float: left;
+  height: 30px;
+  width: 30px;
 }
 
 .menu, #game_dialog, #help_dialog{
@@ -51,6 +57,8 @@
   margin-left: 3px;
   margin-right: 3px;
   margin-top: 10px;
+  box-sizing: border-box;
+  height: 274px;
 }
 .record_panel{
   border-color: grey white white grey;

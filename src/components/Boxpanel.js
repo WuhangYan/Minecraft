@@ -11,8 +11,9 @@ export function Boxpanel(props) {
   before pusing new box to both array, a check for duplicate is required.
   */
   const handleZero = (pos) => {
-    let zeroBox = [], arr = [];
+    let zeroBox = [], arr = openBox;
     zeroBox.push(pos);
+    arr.push(pos);
     let loop = 0;
     while(loop < zeroBox.length) {
       const posArr = zeroBox[loop++].split('-');
@@ -50,7 +51,7 @@ export function Boxpanel(props) {
         if(mines[row+1][col+1]===0 && zeroBox.indexOf((row+1) + '-' + (col+1))<0) zeroBox.push((row+1) + '-' + (col+1));
       }
     }
-    setOpenBox([...openBox, ...arr]);
+    setOpenBox([...arr]);
   }
 
   const handleOpen = (coor) => {
@@ -66,6 +67,19 @@ export function Boxpanel(props) {
     }
     else setFlagBox([...flagBox, coor]);
   }
+
+  const handleReset= () => {
+    setOpenBox(new Array());
+    setFlagBox(new Array());
+    props.reset();
+  }
+
+  if(openBox.length + flagBox.length === r * c) {
+    setOpenBox(new Array());
+    setFlagBox(new Array());
+    props.reset();
+  }
+
   let row = [];
   for(let i=0;i<r;i++){
     let col = [];
@@ -80,6 +94,8 @@ export function Boxpanel(props) {
           setFlag={handleFlag}
           opened={openBox.indexOf(i+'-'+j)>=0}
           flaged={flagBox.indexOf(i+'-'+j)>=0}
+          reset={() => props.reset()}
+          loose={handleReset}
         />
       )
     }

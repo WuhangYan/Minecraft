@@ -3,11 +3,21 @@ import { Boxpanel } from './Boxpanel';
 import { Recordpanel } from './Recordpanel';
 
 export function Board() {
-  const mines = genarateMines(9, 9);
+  const [mines, setMines]= useState(genarateMines(9, 9));
+  const reset = () => {
+    setMines(genarateMines(9, 9));
+  }
   return (
     <div className='board'>
       <div><Recordpanel /></div>
-      <div><Boxpanel mines={mines} total_row={9} total_col={9} /></div>
+      <div>
+        <Boxpanel
+          mines={mines}
+          total_row={9}
+          total_col={9}
+          reset={reset}
+        />
+    </div>
     </div>
   )
 }

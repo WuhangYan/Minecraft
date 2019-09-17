@@ -17,7 +17,7 @@ export function Board() {
           total_col={9}
           reset={reset}
         />
-    </div>
+      </div>
     </div>
   )
 }

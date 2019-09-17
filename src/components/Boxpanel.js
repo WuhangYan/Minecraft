@@ -3,17 +3,17 @@ import { Box } from './Box';
 import '../assets/styles/style.css';
 
 export function Boxpanel(props) {
-  const [openBox, setOpenBox] = useState(new Array());
-  const [flagBox, setFlagBox] = useState(new Array());
+  const [openBox, setOpenBox] = useState([]);
+  const [flagBox, setFlagBox] = useState([]);
   const mines = props.mines;
   const r = props.total_row, c = props.total_col;
   /* zeroBox for storing the box having no mines around and arr for storing the box needed to be auto opened
   before pusing new box to both array, a check for duplicate is required.
   */
-  const handleZero = (pos) => {
+  const handleZero = (coor) => {
     let zeroBox = [], arr = openBox;
-    zeroBox.push(pos);
-    arr.push(pos);
+    zeroBox.push(coor);
+    arr.push(coor);
     let loop = 0;
     while(loop < zeroBox.length) {
       const posArr = zeroBox[loop++].split('-');
@@ -69,14 +69,90 @@ export function Boxpanel(props) {
   }
 
   const handleReset= () => {
-    setOpenBox(new Array());
-    setFlagBox(new Array());
+    alert('loose');
+    setOpenBox([]);
+    setFlagBox([]);
     props.reset();
   }
 
+  const handleAutoOpen = (coor) => {
+    let flags = 0, arr = [];
+    const posArr = coor.split('-');
+    const row = parseInt(posArr[0]), col = parseInt(posArr[1]);
+    if(row>0 && col>0) {
+      arr.push((row-1) + '-' + (col-1));
+      if(flagBox.indexOf((row-1) + '-' + (col-1))>=0) {
+        flags++;
+      }
+    }
+    if(row>0) {
+      arr.push((row-1) + '-' + col);
+      if(flagBox.indexOf((row-1) + '-' + col)>=0) {
+        flags++;
+      }
+    }
+    if(row>0 && col<c-1) {
+      arr.push((row-1) + '-' + (col+1));
+      if(flagBox.indexOf((row-1) + '-' + (col+1))>=0) {
+        flags++;
+      }
+    }
+    if(col>0) {
+      arr.push(row + '-' + (col-1));
+      if(flagBox.indexOf(row + '-' + (col-1))>=0) {
+        flags++;
+      }
+    }
+    if(col<c-1) {
+      arr.push(row + '-' + (col+1));
+      if(flagBox.indexOf(row + '-' + (col+1))>=0) {
+        flags++;
+      }
+    }
+    if(row<r-1 && col>0) {
+      arr.push((row+1) + '-' + (col-1));
+      if(flagBox.indexOf((row+1) + '-' + (col-1))>=0) {
+        flags++;
+      }
+    }
+    if(row<r-1) {
+      arr.push((row+1) + '-' + col);
+      if(flagBox.indexOf((row+1) + '-' + col)>=0) {
+        flags++;
+      }
+    }
+    if(row<r-1 && col<c-1) {
+      arr.push((row+1) + '-' + (col+1));
+      if(flagBox.indexOf((row+1) + '-' + (col+1))>=0) {
+        flags++;
+      }
+    }
+    if(flags === mines[row][col]) {
+      let open_arr = openBox;
+      for(let i=0;i<arr.length;i++) {
+        if(flagBox.indexOf(arr[i]) < 0 && open_arr.indexOf(arr[i]) < 0) open_arr.push(arr[i]);
+      }
+      setOpenBox([...open_arr]);
+    }
+    else if(flags < mines[row][col]) {
+      let blink = [];
+      for(let i=0;i<arr.length;i++) {
+        if(flagBox.indexOf(arr[i]) < 0 && openBox.indexOf(arr[i]) < 0) blink.push(arr[i]);
+      }
+      for(let i=0;i<blink.length;i++) {
+        document.getElementById(blink[i]).style.backgroundColor = '#B8B8B8';
+        setTimeout(() => {
+          for(let j=0;j<blink.length;j++) {
+            document.getElementById(blink[j]).removeAttribute('style');
+          }
+        }, 100);
+      }
+    }
+  }
+
   if(openBox.length + flagBox.length === r * c) {
-    setOpenBox(new Array());
-    setFlagBox(new Array());
+    setOpenBox([]);
+    setFlagBox([]);
     props.reset();
   }
 
@@ -92,6 +168,7 @@ export function Boxpanel(props) {
           setOpen={handleOpen}
           setZero={handleZero}
           setFlag={handleFlag}
+          autoOpen={handleAutoOpen}
           opened={openBox.indexOf(i+'-'+j)>=0}
           flaged={flagBox.indexOf(i+'-'+j)>=0}
           reset={() => props.reset()}

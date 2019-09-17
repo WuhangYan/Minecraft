@@ -145,7 +145,7 @@ export function Boxpanel(props) {
           for(let j=0;j<blink.length;j++) {
             document.getElementById(blink[j]).removeAttribute('style');
           }
-        }, 1000);
+        }, 100);
       }
     }
   }

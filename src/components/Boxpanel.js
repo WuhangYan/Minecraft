@@ -16,8 +16,8 @@ export function Boxpanel(props) {
     arr.push(coor);
     let loop = 0;
     while(loop < zeroBox.length) {
-      const posArr = zeroBox[loop++].split('-');
-      const row = parseInt(posArr[0]), col = parseInt(posArr[1]);
+      const coorArr = zeroBox[loop++].split('-');
+      const row = parseInt(coorArr[0]), col = parseInt(coorArr[1]);
       if(row>0 && col>0 && arr.indexOf((row-1) + '-' + (col-1))<0 && flagBox.indexOf((row-1) + '-' + (col-1))<0) {
         arr.push((row-1) + '-' + (col-1));
         if(mines[row-1][col-1]===0 && zeroBox.indexOf((row-1) + '-' + (col-1))<0) zeroBox.push((row-1) + '-' + (col-1));
@@ -56,6 +56,9 @@ export function Boxpanel(props) {
 
   const handleOpen = (coor) => {
     setOpenBox([...openBox, coor]);
+    const coorArr = coor.split('-');
+    const row = parseInt(coorArr[0]), col = parseInt(coorArr[1]);
+    
   }
 
   const handleFlag = (coor) => {
@@ -69,7 +72,6 @@ export function Boxpanel(props) {
   }
 
   const handleReset= () => {
-    alert('loose');
     setOpenBox([]);
     setFlagBox([]);
     props.reset();
@@ -77,8 +79,8 @@ export function Boxpanel(props) {
 
   const handleAutoOpen = (coor) => {
     let flags = 0, arr = [];
-    const posArr = coor.split('-');
-    const row = parseInt(posArr[0]), col = parseInt(posArr[1]);
+    const coorArr = coor.split('-');
+    const row = parseInt(coorArr[0]), col = parseInt(coorArr[1]);
     if(row>0 && col>0) {
       arr.push((row-1) + '-' + (col-1));
       if(flagBox.indexOf((row-1) + '-' + (col-1))>=0) {

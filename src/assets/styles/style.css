@@ -16,10 +16,15 @@
   border: 1px solid #B0B0B0;
   background-color: #D8D8D8;
 }
-.box img{
+.box #flag{
   float: left;
   height: 26px;
   width: 25px;
+}
+.box #mine{
+  float: left;
+  height: 26px;
+  width: 27px;
 }
 .box span{
   font-weight: bold;

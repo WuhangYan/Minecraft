@@ -38,7 +38,7 @@ function genarateMines(total_row, total_col) {
   }
   for(let m=0;m<total_row;m++) {
     for(let n=0;n<total_col;n++) {
-      if(result[m][n]!=9){
+      if(result[m][n]!==9){
         let num = 0;
         if(m>0 && n>0 && result[m-1][n-1]===9) num++;
         if(m>0 && result[m-1][n]===9) num++;

@@ -1,16 +1,17 @@
 import React from 'react';
 import '../assets/styles/style.css';
 import flag from '../assets/imgs/flag.jpg';
+import mine from '../assets/imgs/mine.jpeg';
 
 export function Box(props) {
-  const game_over = props.opened ? props.num === 9 ? props.loose() : null : null;
   let className = getClassName(props.num);
   const opened = props.opened ? 'opened' : 'unopen';
-  const element = props.opened ? <span className={className}>{props.num}</span> : props.flaged ? <img src={flag} /> : '';
+  const element = props.opened ? props.num === 9 ? <img id='mine' src={mine} /> :
+  <span className={className}>{props.num}</span> : props.flaged ? <img id='flag' src={flag} /> : '';
 /*
   use 'right_left' variable to detemine whether both right and left click event happened
   the positive action is left/right mouse down then left/right mouse up both to the opened box
-  the negatice action, like left mouse down then up or left/right mouse down then left up then left down, etc
+  the negatice action, like left mouse down then up or left/right mouse down then left up then left down, etc,
   will reset the 'right_left' value
 */
   let right_left = 0;
@@ -34,16 +35,11 @@ export function Box(props) {
     else {
       if(btnNum === 0 && !props.flaged) {
         document.getElementById(props.coor).removeAttribute('style');
-        if(props.num === 9) {
-          props.loose();
+        if(props.num === 0) {
+          props.setZero(props.coor);
         }
         else {
-          if(props.num === 0) {
-            props.setZero(props.coor);
-          }
-          else{
-            props.setOpen(props.coor);
-          }
+          props.setOpen(props.coor);
         }
       }
     }

@@ -9,20 +9,21 @@ export function Board() {
     setMines(genarateMines(9, 9));
     setStatus('initial');
   }
-  let word = '';
-  if(status === 'win') {
-    word = 'Win!';
-    document.getElementById('dialog').removeAttribute('style');
-  }
-  else if(status === 'loose') {
-    word = 'Loose!';
-    document.getElementById('dialog').removeAttribute('style');
-  }
 
   const handleStatus = (s) => {
     setStatus(s);
   }
 
+  const dialog = status === 'win' || status === 'loose' ?
+  <div id='dialog' style={{display: 'none'}}>
+    <div>{status.toUpperCase()}</div>
+    <div>
+      <button id='restart' onClick={() => {reset()}}>Restart</button>
+      <button id='close' onClick={() => {window.close()}}>Close</button>
+    </div>
+  </div> : null
+
+  console.log(status)
   return (
     <div>
       <div className='board'>
@@ -37,13 +38,15 @@ export function Board() {
           />
         </div>
       </div>
-      <div id='dialog' style={{display: 'none'}}>
-        <div>{word}</div>
-        <div>
-          <button id='restart' onClick={() => {reset()}}>Restart</button>
-          <button id='close' onClick={() => {window.close()}}>Close</button>
-        </div>
-      </div>
+      {
+        status === 'win' || status === 'loose' ?
+        <div className='dialog'>
+          <div>{status.toUpperCase()}</div>
+          <div>
+            <button onClick={() => {reset()}}>Restart</button>
+          </div>
+        </div> : null
+      }
     </div>
   )
 }

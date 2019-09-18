@@ -156,9 +156,7 @@ export function Boxpanel(props) {
   }
 
   if(openBox.length + flagBox.length === r * c) {
-    setOpenBox([]);
-    setFlagBox([]);
-    props.reset();
+    props.setStatus('win');
   }
 
   let row = [];

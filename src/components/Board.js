@@ -3,20 +3,46 @@ import { Boxpanel } from './Boxpanel';
 import { Recordpanel } from './Recordpanel';
 
 export function Board() {
-  const [mines, setMines]= useState(genarateMines(9, 9));
+  const [mines, setMines] = useState(genarateMines(9, 9));
+  const [status, setStatus] = useState('initial');
   const reset = () => {
     setMines(genarateMines(9, 9));
+    setStatus('initial');
   }
+  let word = '';
+  if(status === 'win') {
+    word = 'Win!';
+    document.getElementById('dialog').removeAttribute('style');
+  }
+  else if(status === 'loose') {
+    word = 'Loose!';
+    document.getElementById('dialog').removeAttribute('style');
+  }
+
+  const handleStatus = (s) => {
+    setStatus(s);
+  }
+
   return (
-    <div className='board'>
-      <div><Recordpanel /></div>
-      <div>
-        <Boxpanel
-          mines={mines}
-          total_row={9}
-          total_col={9}
-          reset={reset}
-        />
+    <div>
+      <div className='board'>
+        <div><Recordpanel /></div>
+        <div>
+          <Boxpanel
+            mines={mines}
+            total_row={9}
+            total_col={9}
+            setStatus={handleStatus}
+            status={status}
+          />
+        </div>
+      </div>
+      <div id='dialog' style={{display: 'none'}}>
+        <div>{word}</div>
+        <div>
+          <button id='restart' onClick={() => {reset()}}>Restart</button>
+          <button id='close' onClick={() => {window.close()}}>Close</button>
+        </div>
       </div>
     </div>
   )

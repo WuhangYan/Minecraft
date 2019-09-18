@@ -112,3 +112,29 @@
   margin-top: 5px;
   height: 40px;
 }
+
+#dialog{
+  position: absolute;
+  height: 100px;
+  width: 500px;
+  margin-left: 32%;
+  margin-top: 100px;
+  outline: #F8F8F8 ridge 10px
+}
+#dialog div{
+  font-size: 30px;
+  text-align: center;
+  margin-top: 10px;
+}
+#dialog button{
+  font-size: 20px;
+  margin-top: 10px;
+}
+#dialog #restart{
+  margin-left: 20px;
+  float: left;
+}
+#dialog #close{
+  margin-right: 20px;
+  float: right
+}

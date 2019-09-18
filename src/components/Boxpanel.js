@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box } from './Box';
 import '../assets/styles/style.css';
 
@@ -7,6 +7,13 @@ export function Boxpanel(props) {
   const [flagBox, setFlagBox] = useState([]);
   const mines = props.mines;
   const r = props.total_row, c = props.total_col;
+  useEffect(() => {
+    if(props.status === 'initial') {
+      props.setStatus('process');
+      setOpenBox([]);
+      setFlagBox([]);
+    }
+  })
   /* zeroBox for storing the box having no mines around and arr for storing the box needed to be auto opened
   before pusing new box to both array, a check for duplicate is required.
   */
@@ -58,7 +65,9 @@ export function Boxpanel(props) {
     setOpenBox([...openBox, coor]);
     const coorArr = coor.split('-');
     const row = parseInt(coorArr[0]), col = parseInt(coorArr[1]);
-    
+    if(mines[row][col] === 9) {
+      props.setStatus('loose');
+    }
   }
 
   const handleFlag = (coor) => {
@@ -69,12 +78,6 @@ export function Boxpanel(props) {
       setFlagBox([...update]);
     }
     else setFlagBox([...flagBox, coor]);
-  }
-
-  const handleReset= () => {
-    setOpenBox([]);
-    setFlagBox([]);
-    props.reset();
   }
 
   const handleAutoOpen = (coor) => {
@@ -174,7 +177,6 @@ export function Boxpanel(props) {
           opened={openBox.indexOf(i+'-'+j)>=0}
           flaged={flagBox.indexOf(i+'-'+j)>=0}
           reset={() => props.reset()}
-          loose={handleReset}
         />
       )
     }

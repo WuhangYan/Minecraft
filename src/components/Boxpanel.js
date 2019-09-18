@@ -175,6 +175,7 @@ export function Boxpanel(props) {
           opened={openBox.indexOf(i+'-'+j)>=0}
           flaged={flagBox.indexOf(i+'-'+j)>=0}
           reset={() => props.reset()}
+          status={props.status}
         />
       )
     }

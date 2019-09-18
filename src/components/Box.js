@@ -16,6 +16,7 @@ export function Box(props) {
 */
   let right_left = 0;
   const handleMouseUp = (e) => {
+    if(props.status !== 'process') return 
     const btnNum = e.button;
     if(props.opened) {
       if(right_left >= 2 && right_left <= 3) {
@@ -45,6 +46,7 @@ export function Box(props) {
     }
   }
   const handleMouseDown = (e) => {
+    if(props.status !== 'process') return;
     const btnNum = e.button;
     if(props.opened) {
       if(btnNum === 0) {

@@ -8,6 +8,7 @@ export function Box(props) {
   const opened = props.opened ? 'opened' : 'unopen';
   const element = props.opened ? props.num === 9 ? <img id='mine' src={mine} /> :
   <span className={className}>{props.num}</span> : props.flaged ? <img id='flag' src={flag} /> : '';
+  if(props.opened && props.num === 9) props.loose()
 /*
   use 'right_left' variable to detemine whether both right and left click event happened
   the positive action is left/right mouse down then left/right mouse up both to the opened box
@@ -16,7 +17,7 @@ export function Box(props) {
 */
   let right_left = 0;
   const handleMouseUp = (e) => {
-    if(props.status !== 'process') return 
+    if(props.status !== 'process') return
     const btnNum = e.button;
     if(props.opened) {
       if(right_left >= 2 && right_left <= 3) {

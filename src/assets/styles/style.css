@@ -114,12 +114,11 @@
 }
 
 .dialog{
-  position: absolute;
   height: 100px;
   width: 500px;
-  margin-left: 32%;
+  margin-left: 450px;
   margin-top: 100px;
-  outline: #F8F8F8 ridge 10px
+  outline: #F8F8F8 ridge 10px;
 }
 .dialog div{
   font-size: 30px;

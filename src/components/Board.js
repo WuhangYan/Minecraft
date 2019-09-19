@@ -14,16 +14,6 @@ export function Board() {
     setStatus(s);
   }
 
-  const dialog = status === 'win' || status === 'loose' ?
-  <div id='dialog' style={{display: 'none'}}>
-    <div>{status.toUpperCase()}</div>
-    <div>
-      <button id='restart' onClick={() => {reset()}}>Restart</button>
-      <button id='close' onClick={() => {window.close()}}>Close</button>
-    </div>
-  </div> : null
-
-  console.log(status)
   return (
     <div>
       <div className='board'>
@@ -45,7 +35,7 @@ export function Board() {
           <div>
             <button onClick={() => {reset()}}>Restart</button>
           </div>
-        </div> : null
+        </div> : <div></div>
       }
     </div>
   )

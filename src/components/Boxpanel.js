@@ -63,11 +63,6 @@ export function Boxpanel(props) {
 
   const handleOpen = (coor) => {
     setOpenBox([...openBox, coor]);
-    const coorArr = coor.split('-');
-    const row = parseInt(coorArr[0]), col = parseInt(coorArr[1]);
-    if(mines[row][col] === 9) {
-      props.setStatus('loose');
-    }
   }
 
   const handleFlag = (coor) => {
@@ -155,10 +150,12 @@ export function Boxpanel(props) {
     }
   }
 
+  const handleLoose = () => {
+    props.setStatus('loose');
+  }
+
   if(openBox.length + flagBox.length === r * c) {
-    setOpenBox([]);
-    setFlagBox([]);
-    props.reset();
+    props.setStatus('win');
   }
 
   let row = [];
@@ -176,7 +173,8 @@ export function Boxpanel(props) {
           autoOpen={handleAutoOpen}
           opened={openBox.indexOf(i+'-'+j)>=0}
           flaged={flagBox.indexOf(i+'-'+j)>=0}
-          reset={() => props.reset()}
+          status={props.status}
+          loose={handleLoose}
         />
       )
     }

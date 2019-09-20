@@ -3,10 +3,12 @@ import { Box } from './Box';
 import '../assets/styles/style.css';
 
 export function Boxpanel(props) {
+  const r = props.total_row, c = props.total_col, m = props.total_mine;
+  //const [mines, setMines] = useState(genarateMines(r, c, m));
+  const [time, setTime] = useState(0);
   const [openBox, setOpenBox] = useState([]);
   const [flagBox, setFlagBox] = useState([]);
   const mines = props.mines;
-  const r = props.total_row, c = props.total_col;
   useEffect(() => {
     if(props.status === 'initial') {
       props.setStatus('process');
@@ -14,6 +16,9 @@ export function Boxpanel(props) {
       setFlagBox([]);
     }
   })
+  if(props.status === 'initial') return null;
+  //console.log(mines)
+  //console.log(props);
   /* zeroBox for storing the box having no mines around and arr for storing the box needed to be auto opened
   before pusing new box to both array, a check for duplicate is required.
   */
@@ -185,7 +190,7 @@ export function Boxpanel(props) {
     );
   }
   return (
-    <div className='box_panel'>
+    <div className='box_panel10'>
       {row}
     </div>
   )

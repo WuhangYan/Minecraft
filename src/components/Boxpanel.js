@@ -14,11 +14,7 @@ export function Boxpanel(props) {
       props.setStatus('process');
       setOpenBox([]);
       setFlagBox([]);
-      //setMines(genarateMines(r, c, m));
-      //console.log(mines);
-      //console.log('got inside')
     }
-    //console.log('got in')
   })
   if(props.status === 'initial') return null;
   //console.log(mines)
@@ -72,7 +68,6 @@ export function Boxpanel(props) {
 
   const handleOpen = (coor) => {
     setOpenBox([...openBox, coor]);
-    console.log('in')
   }
 
   const handleFlag = (coor) => {
@@ -194,9 +189,8 @@ export function Boxpanel(props) {
       </div>
     );
   }
-  console.log('end');
   return (
-    <div className='box_panel'>
+    <div className='box_panel10'>
       {row}
     </div>
   )

@@ -3,6 +3,77 @@ import { Boxpanel } from './Boxpanel';
 import { Recordpanel } from './Recordpanel';
 import { Menu } from './Menu';
 
+const style = {
+  'board': {
+    'easy': {
+      marginLeft: '38%',
+      marginTop: '4%',
+      width: '280px',
+      height: '340px',
+      border: '5px solid lightgrey',
+      backgroundColor: 'lightgrey'
+    },
+    'medium': {
+      marginLeft: '33%',
+      marginTop: '4%',
+      width: '490px',
+      height: '544px',
+      border: '5px solid lightgrey',
+      backgroundColor: 'lightgrey'
+    },
+    'hard': {
+      marginLeft: '20%',
+      marginTop: '4%',
+      width: '910px',
+      height: '544px',
+      border: '5px solid lightgrey',
+      backgroundColor: 'lightgrey'
+    }
+  },
+  'box_panel': {
+    'easy': {
+      borderColor: 'grey white white grey',
+      borderWidth: '2px',
+      borderStyle: 'solid',
+      marginLeft: '3px',
+      marginRight: '3px',
+      marginTop: '10px',
+      boxSizing: 'border-box',
+      height: '274px'
+    },
+    'medium': {
+      borderColor: 'grey white white grey',
+      borderWidth: '2px',
+      borderStyle: 'solid',
+      marginLeft: '3px',
+      marginRight: '3px',
+      marginTop: '10px',
+      boxSizing: 'border-box',
+      height: '484px'
+    },
+    'hard': {
+      borderColor: 'grey white white grey',
+      borderWidth: '2px',
+      borderStyle: 'solid',
+      marginLeft: '3px',
+      marginRight: '3px',
+      marginTop: '10px',
+      boxSizing: 'border-box',
+      height: '484px'
+    }
+  },
+  'record_panel': {
+    borderColor: 'grey white white grey',
+    borderWidth: '2px',
+    borderStyle: 'solid',
+    marginLeft: '3px',
+    marginRight: '3px',
+    marginTop: '5px',
+    height: '40px'
+  }
+}
+
+
 export function Board() {
   const [mines, setMines] = useState([]);
   const [status, setStatus] = useState('initial');
@@ -20,7 +91,6 @@ export function Board() {
     setDiff(d);
     reset();
   }
-  console.log('status: ' + status)
   let total_row, total_col, total_mine;
   switch (diff) {
     case 'easy':
@@ -33,7 +103,7 @@ export function Board() {
       total_col = 16;
       total_mine = 40;
       break;
-    case 'medium':
+    case 'hard':
       total_row = 16;
       total_col = 30;
       total_mine = 99;
@@ -48,9 +118,9 @@ export function Board() {
           setDiff={handleSetDiff}
         />
       </div>
-      <div className='board'>
-        <div><Recordpanel /></div>
-        <div>
+      <div style={style.board.easy}>
+        <div style={style.record_panel}><Recordpanel /></div>
+        <div style={style.box_panel.easy}>
           <Boxpanel
             total_row={total_row}
             total_col={total_col}

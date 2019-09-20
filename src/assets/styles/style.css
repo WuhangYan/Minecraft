@@ -71,7 +71,7 @@
   font-size:25px
 }
 
-.board{
+/*.board10{
   margin-left: 38%;
   margin-top: 4%;
   width: 280px;
@@ -79,7 +79,7 @@
   border: 5px solid lightgrey;
   background-color: lightgrey;
 }
-.box_panel{
+.box_panel10{
   border-color: grey white white grey;
   border-width: 2px;
   border-style: solid;
@@ -89,7 +89,7 @@
   box-sizing: border-box;
   height: 274px;
 }
-.record_panel{
+.record_panel10{
   border-color: grey white white grey;
   border-width: 2px;
   border-style: solid;
@@ -97,7 +97,7 @@
   margin-right: 3px;
   margin-top: 5px;
   height: 40px;
-}
+}*/
 
 .dialog{
   height: 100px;

@@ -49,7 +49,11 @@ export function Board() {
         />
       </div>
       <div style={style.board[diff]}>
-        <div style={style.record_panel}><Recordpanel /></div>
+        <div style={style.record_panel}>
+          <Recordpanel
+            status={status}
+          />
+        </div>
         <div style={style.box_panel[diff]}>
           <Boxpanel
             total_row={total_row}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Boxpanel } from './Boxpanel';
 import { Recordpanel } from './Recordpanel';
 import { Menu } from './Menu';
-import { style, genarateMines } from '../assets/utilities/utilities';
+import { style, genarateMines } from '../assets/utilities/utility';
 
 export function Board() {
   const [mines, setMines] = useState([]);
@@ -19,8 +19,9 @@ export function Board() {
   }
   const handleSetDiff = (d) => {
     setDiff(d);
-    reset();
+    reset()
   }
+  console.log(status)
   let total_row, total_col, total_mine;
   switch (diff) {
     case 'easy':

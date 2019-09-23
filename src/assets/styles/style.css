@@ -1,3 +1,8 @@
+@font-face{
+  font-family: digital-num;
+  src: url('./sa-digital-number.ttf')
+}
+
 .box{
   outline: none;
   float: left;
@@ -71,34 +76,6 @@
   font-size:25px
 }
 
-/*.board10{
-  margin-left: 38%;
-  margin-top: 4%;
-  width: 280px;
-  height: 340px;
-  border: 5px solid lightgrey;
-  background-color: lightgrey;
-}
-.box_panel10{
-  border-color: grey white white grey;
-  border-width: 2px;
-  border-style: solid;
-  margin-left: 3px;
-  margin-right: 3px;
-  margin-top: 10px;
-  box-sizing: border-box;
-  height: 274px;
-}
-.record_panel10{
-  border-color: grey white white grey;
-  border-width: 2px;
-  border-style: solid;
-  margin-left: 3px;
-  margin-right: 3px;
-  margin-top: 5px;
-  height: 40px;
-}*/
-
 .dialog{
   height: 100px;
   width: 500px;
@@ -114,4 +91,10 @@
 .dialog button{
   font-size: 20px;
   margin-top: 10px;
+}
+
+.record_panel .time{
+  font-family: digital-num;
+  font-size: 18px;
+  margin-top: 5px;
 }

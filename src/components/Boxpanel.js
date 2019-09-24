@@ -75,9 +75,13 @@ export function Boxpanel(props) {
     if(location>=0) {
       const update = flagBox;
       update.splice(location, 1);
+      props.setLeftMine(update.length);
       setFlagBox([...update]);
     }
-    else setFlagBox([...flagBox, coor]);
+    else {
+      props.setLeftMine(flagBox.length+1);
+      setFlagBox([...flagBox, coor]);
+    }
   }
 
   const handleAutoOpen = (coor) => {
@@ -190,7 +194,7 @@ export function Boxpanel(props) {
     );
   }
   return (
-    <div className='box_panel10'>
+    <div>
       {row}
     </div>
   )

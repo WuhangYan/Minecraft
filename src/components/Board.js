@@ -2,24 +2,29 @@ import React, { useState } from 'react';
 import { Boxpanel } from './Boxpanel';
 import { Recordpanel } from './Recordpanel';
 import { Menu } from './Menu';
-import { style, genarateMines } from '../assets/utilities/utilities';
+import { style, genarateMines } from '../assets/utilities/utility';
 
 export function Board() {
   const [mines, setMines] = useState([]);
   const [status, setStatus] = useState('initial');
   const [diff, setDiff] = useState('easy');
+  const [left_mine, setLeftMine] = useState(10);
   const reset = () => {
     setStatus('initial');
   }
   const handleStatus = (s) => {
     if(s === 'process') {
-      setMines(genarateMines(total_row, total_col, total_mine))
+      setMines(genarateMines(total_row, total_col, total_mine));
+      setLeftMine(total_mine);
     }
     setStatus(s);
   }
   const handleSetDiff = (d) => {
     setDiff(d);
     reset();
+  }
+  const handleSetLeftMine = (change) => {
+    setLeftMine(total_mine - change);
   }
   let total_row, total_col, total_mine;
   switch (diff) {
@@ -49,7 +54,12 @@ export function Board() {
         />
       </div>
       <div style={style.board[diff]}>
-        <div style={style.record_panel}><Recordpanel /></div>
+        <div style={style.record_panel}>
+          <Recordpanel
+            status={status}
+            left_mine={left_mine}
+          />
+        </div>
         <div style={style.box_panel[diff]}>
           <Boxpanel
             total_row={total_row}
@@ -58,6 +68,7 @@ export function Board() {
             setStatus={handleStatus}
             status={status}
             mines={mines}
+            setLeftMine={handleSetLeftMine}
           />
         </div>
       </div>

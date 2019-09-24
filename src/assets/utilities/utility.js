@@ -4,7 +4,7 @@ export const style = {
       marginLeft: '38%',
       marginTop: '4%',
       width: '280px',
-      height: '340px',
+      height: '335px',
       border: '5px solid lightgrey',
       backgroundColor: 'lightgrey'
     },

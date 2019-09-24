@@ -3,49 +3,39 @@ import '../assets/styles/style.css';
 
 export function Recordpanel(props) {
   const [time, setTime] = useState('00:00');
+  const [left, setLeft] = useState('0'+props.left_mine);
   useEffect(() => {
     if(props.status === 'initial') {
       setTime('00:00');
     }
     if(props.status === 'process') {
-      const time_tick = setTimeout(() => {
-        const arr = time.split(':');
-        let min = arr[0], sec = arr[1];
-        if(sec.charAt(1) === '9') {
-          if(sec.charAt(0) === '5') {
-            if(min.charAt(1) === '9') {
-              if(min.charAt(0) === '9') alert('time out');
-              else {
-                sec = '00';
-                min = parseInt(min.charAt(0)) + 1 + '0';
-                setTime(min + ':' + sec);
-              }
-            }
-            else {
-              sec = '00';
-              min = min.charAt(0) + (parseInt(min.charAt(1)) + 1);
-              setTime(min + ':' + sec);
-            }
-          }
-          else {
-            sec = parseInt(sec.charAt(0)) + 1 + '0';
-            setTime(min + ':' + sec);
-          }
-        }
+      let min = 0, sec = 0;
+      const time_tick = setInterval(() => {
+        if(sec < 60) sec++;
         else {
-          sec = sec.charAt(0) + (parseInt(sec.charAt(1)) + 1);
-          setTime(min + ':' + sec);
+          min++;
+          sec = 0;
         }
+        const m = min < 10 ? '0' + min : min + '';
+        const s = sec < 10 ? '0' + sec : sec + '';
+        setTime(m + ':' + s);
       }, 1000)
       return () => {
         clearTimeout(time_tick);
       }
     }
-  })
+  }, [props.status])
+
+  useEffect(() => {
+    const num = props.left_mine;
+    if(num < 10) setLeft('00'+num);
+    else setLeft('0'+num)
+  }, [props.left_mine])
 
   return (
     <div className='record_panel'>
       <div className='time'>{time}</div>
+      <div className='left'>{left}</div>
     </div>
   )
 }

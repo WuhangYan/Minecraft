@@ -8,20 +8,24 @@ export function Board() {
   const [mines, setMines] = useState([]);
   const [status, setStatus] = useState('initial');
   const [diff, setDiff] = useState('easy');
+  const [left_mine, setLeftMine] = useState(10);
   const reset = () => {
     setStatus('initial');
   }
   const handleStatus = (s) => {
     if(s === 'process') {
-      setMines(genarateMines(total_row, total_col, total_mine))
+      setMines(genarateMines(total_row, total_col, total_mine));
+      setLeftMine(total_mine);
     }
     setStatus(s);
   }
   const handleSetDiff = (d) => {
     setDiff(d);
-    reset()
+    reset();
   }
-  console.log(status)
+  const handleSetLeftMine = (change) => {
+    setLeftMine(total_mine - change);
+  }
   let total_row, total_col, total_mine;
   switch (diff) {
     case 'easy':
@@ -53,6 +57,7 @@ export function Board() {
         <div style={style.record_panel}>
           <Recordpanel
             status={status}
+            left_mine={left_mine}
           />
         </div>
         <div style={style.box_panel[diff]}>
@@ -63,6 +68,7 @@ export function Board() {
             setStatus={handleStatus}
             status={status}
             mines={mines}
+            setLeftMine={handleSetLeftMine}
           />
         </div>
       </div>

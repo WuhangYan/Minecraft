@@ -97,4 +97,19 @@
   font-family: digital-num;
   font-size: 18px;
   margin-top: 5px;
+  float: left;
+  margin-left: 4px;
+  background-color: #101010;
+  padding: 2px;
+  color: #B00000
+}
+.record_panel .left{
+  font-family: digital-num;
+  font-size: 18px;
+  margin-top: 5px;
+  float: right;
+  margin-right: 4px;
+  background-color: #101010;
+  padding: 2px;
+  color: #B00000
 }

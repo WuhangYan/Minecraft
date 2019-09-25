@@ -8,7 +8,6 @@ export function Boxpanel(props) {
   const [time, setTime] = useState(0);
   const [openBox, setOpenBox] = useState([]);
   const [flagBox, setFlagBox] = useState([]);
-  const mines = props.mines;
   useEffect(() => {
     if(props.status === 'initial') {
       props.setStatus('process');
@@ -17,6 +16,7 @@ export function Boxpanel(props) {
     }
   })
   if(props.status === 'initial') return null;
+  const mines = props.mines;
   //console.log(mines)
   //console.log(props);
   /* zeroBox for storing the box having no mines around and arr for storing the box needed to be auto opened
@@ -25,7 +25,7 @@ export function Boxpanel(props) {
   const handleZero = (coor) => {
     let zeroBox = [], arr = openBox;
     zeroBox.push(coor);
-    arr.push(coor);
+    if(arr.indexOf(coor) < 0) arr.push(coor);
     let loop = 0;
     while(loop < zeroBox.length) {
       const coorArr = zeroBox[loop++].split('-');
@@ -139,7 +139,12 @@ export function Boxpanel(props) {
     if(flags === mines[row][col]) {
       let open_arr = openBox;
       for(let i=0;i<arr.length;i++) {
-        if(flagBox.indexOf(arr[i]) < 0 && open_arr.indexOf(arr[i]) < 0) open_arr.push(arr[i]);
+        if(flagBox.indexOf(arr[i]) < 0 && open_arr.indexOf(arr[i]) < 0) {
+          open_arr.push(arr[i]);
+          const index_arr = arr[i].split('-');
+          const tmp_r = index_arr[0], tmp_c = index_arr[1];
+          if(mines[tmp_r][tmp_c] === 0) handleZero(arr[i]);
+        }
       }
       setOpenBox([...open_arr]);
     }
@@ -166,6 +171,8 @@ export function Boxpanel(props) {
   if(openBox.length + flagBox.length === r * c) {
     props.setStatus('win');
   }
+
+
 
   let row = [];
   for(let i=0;i<r;i++){

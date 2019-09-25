@@ -167,10 +167,12 @@ export function Boxpanel(props) {
   const handleLoose = () => {
     props.setStatus('loose');
   }
-  console.log(openBox.length + ' ' + flagBox.length);
+
   if(openBox.length + flagBox.length === r * c) {
     props.setStatus('win');
   }
+
+
 
   let row = [];
   for(let i=0;i<r;i++){
